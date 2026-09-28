@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from operator import truediv
 
 
 class JavaType(object):
@@ -88,6 +89,11 @@ class JavaPrimitiveType(JavaType):
 
     Primitive types are not object types and do not have methods.
     """
+    def is_subtype_of(self, other):
+        if other is self:
+            return True
+        else:
+            return False
 
 
 class JavaObjectType(JavaType):
@@ -132,6 +138,14 @@ class JavaObjectType(JavaType):
                 except NoSuchJavaMethod:
                     pass
             raise NoSuchJavaMethod("{0} has no method named {1}".format(self.name, name))
+
+    def is_subtype_of(self, other):  # TODO: Talk over with Paul in more detail
+        if self is other:  # If is same type
+            return True
+        for supertype in self.direct_supertypes:
+            if supertype.is_subtype_of(other):
+                return True
+        return False
 
 
 class JavaVoidType(JavaType):
