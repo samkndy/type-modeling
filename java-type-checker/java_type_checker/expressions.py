@@ -125,6 +125,7 @@ class JavaMethodCall(JavaExpression):
     def check_types(self):
         for arg in self.args:
             arg.check_types()
+
         self.receiver.check_types()
 
         method = self.receiver.static_type().method_named(self.method_name)

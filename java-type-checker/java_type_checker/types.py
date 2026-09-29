@@ -128,16 +128,16 @@ class JavaObjectType(JavaType):
     def add_method(self, method):
         self.methods[method.name] = method
 
-    def method_named(self, name):
+    def method_named(self, method_name):
         try:
-            return self.methods[name]
+            return self.methods[method_name]
         except KeyError:
             for supertype in self.direct_supertypes:
                 try:
-                    return supertype.method_named(name)
+                    return supertype.method_named(method_name)
                 except NoSuchJavaMethod:
                     pass
-            raise NoSuchJavaMethod("{0} has no method named {1}".format(self.name, name))
+            raise NoSuchJavaMethod("{0} has no method named {1}".format(self.name, method_name))
 
     def is_subtype_of(self, other):  # TODO: Talk over with Paul in more detail
         if self is other:  # If is same type
@@ -164,9 +164,21 @@ class JavaNullType(JavaType):
     Null acts as though it is a subtype of all object types. However, it raises an exception for any
     attempt to look up a method.
     """
+    is_object_type = True
+    is_instantiable = False
+
     def __init__(self):
         super().__init__("null")
 
+    def is_subtype_of(self, other):
+        if other.is_object_type:
+            return True
+        return False
+
+    def method_named(self, method_name):
+        raise NoSuchJavaMethod(
+            "Cannot invoke method " + method_name + "() on null"
+        )
 
 class JavaTypeError(Exception):
     """Indicates a compile-time type error in an expression.
