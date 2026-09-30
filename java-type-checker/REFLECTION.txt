@@ -5,3 +5,4 @@ for booleans where that was not necessary.
 -Paul also had a less verbose implementation of JavaMethodCall -- mainly, in generating the "actual_types" list. I
 don't imagine the runtime speed of these implementations to be different, but my version is less readable, which is
 still important.
+-My null implementation is also very similar to Paul's in form.
