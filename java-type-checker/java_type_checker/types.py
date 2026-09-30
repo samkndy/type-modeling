@@ -139,7 +139,7 @@ class JavaObjectType(JavaType):
                     pass
             raise NoSuchJavaMethod("{0} has no method named {1}".format(self.name, method_name))
 
-    def is_subtype_of(self, other):  # TODO: Talk over with Paul in more detail
+    def is_subtype_of(self, other):
         if self is other:  # If is same type
             return True
         for supertype in self.direct_supertypes:

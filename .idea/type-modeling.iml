@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/java-type-checker/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/java-type-checker" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/java-type-checker/.venv" />
     </content>
     <orderEntry type="jdk" jdkName="D:\MSCS\comp381\type-modeling\.venv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
